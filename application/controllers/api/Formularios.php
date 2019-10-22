@@ -27,6 +27,25 @@ class Formularios extends REST_Controller {
             $this->response($data, REST_Controller::HTTP_OK);
         }
 
+        public function getFormulariosPorCoord_get()
+        {
+            $id = $this->uri->segment(4);
+            $spFormByCoord = 'CALL spGetFormbyCoord(?)';
+
+             $params = array('userID' => $id);
+
+            if(!empty($id)){
+                $data = $this->db->query($spFormByCoord,$params);
+            }else{
+                $data = $this->db->get('tb_fomr_feedback');
+            }
+
+            if(!$data)
+                $data = 'No hay registros con este ID.';
+
+            $this->response($data->result(), REST_Controller::HTTP_OK);
+        }
+
         public function insertFormularios_post()
         {
             $data = $this->input->post();

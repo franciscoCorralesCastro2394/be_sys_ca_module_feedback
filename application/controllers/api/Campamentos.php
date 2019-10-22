@@ -3,13 +3,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require APPPATH . 'libraries/REST_Controller.php';
 
-class Campamento extends REST_Controller {
+class Campamentos extends REST_Controller {
 
         public function __construct()
         {
                 parent::__construct();
                 $this->load->database();
         }
+
+
+         public function getCampamentosPorCoord_get()
+        {
+            $id = $this->uri->segment(4);
+            $spFormByCoord = 'CALL spGetCampsByCoord(?)';
+
+             $params = array('userID' => $id);
+
+            if(!empty($id)){
+                $data = $this->db->query($spFormByCoord,$params);
+            }else{
+                $data = $this->db->get('tb_camp_gruop');
+            }
+
+            if(!$data)
+                $data = 'No hay registros con este ID.';
+
+            $this->response($data->result(), REST_Controller::HTTP_OK);
+        }
+
 
         public function getCampamentos_get()
         {
