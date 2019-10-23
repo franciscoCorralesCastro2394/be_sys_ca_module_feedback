@@ -56,8 +56,8 @@ class Formularios extends REST_Controller {
 
         public function updateFormularios_post()
         {
-            $id = $this->post('id_form_feedback');
-            $data = $this->post();
+            $id = $this->input->post('id_form_feedback');
+            $data = $this->input->post();
 
             if($this->db->update('tb_fomr_feedback', $data, array('id_form_feedback'=>$id)))
                 $this->response('Item actualizado con éxito.', REST_Controller::HTTP_OK);

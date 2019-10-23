@@ -50,7 +50,7 @@ class Campamentos extends REST_Controller {
 
         public function insertCampamentos_post()
         {
-            $data = $this->input->post();
+            $data = $this->post();
 
             if($this->db->insert('tb_camp_gruop', $data))
                 $this->response('Item creado con éxito.', REST_Controller::HTTP_OK); 
