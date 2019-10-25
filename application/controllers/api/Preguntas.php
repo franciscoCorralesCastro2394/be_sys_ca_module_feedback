@@ -11,6 +11,23 @@ class Preguntas extends REST_Controller {
                 $this->load->database();
         }
 
+
+
+         public function getPreguntasPorForm_get()
+        {
+            $id = $this->uri->segment(4);
+            $spQuestByForm = 'CALL spGetQuestbyForm(?)';
+
+             $params = array('idForm' => $id);
+
+            if(!empty($id)){
+                $data = $this->db->query($spQuestByForm,$params);
+            }
+            
+            $this->response($data->result(), REST_Controller::HTTP_OK);
+        }
+
+
         public function getPreguntas_get()
         {
             $id = $this->uri->segment(4);
