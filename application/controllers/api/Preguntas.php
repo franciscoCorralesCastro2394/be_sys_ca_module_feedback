@@ -48,8 +48,8 @@ class Preguntas extends REST_Controller {
         {
             $data = $this->input->post();
 
-            if($this->db->insert('id_quest_feedback', $data))
-                $this->response('Item creado con éxito.', REST_Controller::HTTP_OK); 
+            if($this->db->insert('tb_quest_feeback', $data))
+                $this->response($this->db->insert_id(), REST_Controller::HTTP_OK); 
         }
 
         public function updatePreguntas_post()

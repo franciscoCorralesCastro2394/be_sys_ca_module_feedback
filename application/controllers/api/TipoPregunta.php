@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require APPPATH . 'libraries/REST_Controller.php';
 
-class tipoPregunta extends REST_Controller {
+class TipoPregunta extends REST_Controller {
 
         public function __construct()
         {

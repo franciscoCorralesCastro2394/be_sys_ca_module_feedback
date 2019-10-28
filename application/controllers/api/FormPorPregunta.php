@@ -32,7 +32,7 @@ class FormPorPregunta extends REST_Controller {
             $data = $this->input->post();
 
             if($this->db->insert('tb_form_by_quest', $data))
-                $this->response('Item creado con éxito.', REST_Controller::HTTP_OK); 
+                $this->response('OK', REST_Controller::HTTP_OK); 
         }
 
         public function updateFormPorPregunta_post()
