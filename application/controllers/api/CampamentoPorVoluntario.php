@@ -29,11 +29,32 @@ class CampamentoPorVoluntario extends REST_Controller {
 
         public function insertCampamentoPorVoluntario_post()
         {
-            $data = $this->input->post();
+            $data = $this->post();
 
             if($this->db->insert('tb_camp_by_volontier', $data))
                 $this->response('Item creado con éxito.', REST_Controller::HTTP_OK); 
         }
+
+
+        public function getVoluntPorCamp_get()
+        {
+            $id = $this->uri->segment(4);
+            $spVoluntByCamp = 'CALL spGetVoluntByCamp(?)';
+
+             $params = array('campID' => $id);
+
+            if(!empty($id)){
+                $data = $this->db->query($spVoluntByCamp,$params);
+            }
+
+            if(!$data)
+                $data = '';
+
+            $this->response($data->result(), REST_Controller::HTTP_OK);
+        }
+
+
+
 
         public function updateCampamentoPorVoluntario_post()
         {
