@@ -46,6 +46,20 @@ class Formularios extends REST_Controller {
             $this->response($data->result(), REST_Controller::HTTP_OK);
         }
 
+         public function getFormulariosPorCampPorVolt_get()
+        {
+            $id = $this->uri->segment(4);
+            $spGetFormByCampByVolt = 'CALL spGetFormByCampByVolt(?)';
+
+             $params = array('userID' => $id);
+
+            if(!empty($id)){
+                $data = $this->db->query($spGetFormByCampByVolt,$params);
+            }
+
+            $this->response($data->result(), REST_Controller::HTTP_OK);
+        }
+
         public function insertFormularios_post()
         {
             $data = $this->input->post();
