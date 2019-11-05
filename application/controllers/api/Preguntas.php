@@ -11,8 +11,6 @@ class Preguntas extends REST_Controller {
                 $this->load->database();
         }
 
-
-
          public function getPreguntasPorForm_get()
         {
             $id = $this->uri->segment(4);
@@ -26,7 +24,6 @@ class Preguntas extends REST_Controller {
             
             $this->response($data->result(), REST_Controller::HTTP_OK);
         }
-
 
         public function getPreguntas_get()
         {
@@ -69,6 +66,17 @@ class Preguntas extends REST_Controller {
                 $this->response('Item eliminado con éxito.', REST_Controller::HTTP_OK);
         }
 
+      public function getPreguntasPorFormulario_get()
+        {
+            $id = $this->uri->segment(4);
+            $spGetQuestionByForm = 'CALL spGetQuestionByForm(?)';
 
-     
+             $params = array('formID' => $id);
+
+            if(!empty($id)){
+                $data = $this->db->query($spGetQuestionByForm,$params);
+            }
+
+            $this->response($data->result(), REST_Controller::HTTP_OK);
+        }  
 }
