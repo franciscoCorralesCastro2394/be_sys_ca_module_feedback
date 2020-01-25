@@ -53,5 +53,20 @@ class RespuestaPorPregunta extends REST_Controller {
         }
 
 
+
+    public function getPreguntasPorForm_get()
+        {
+            $id = $this->uri->segment(4);
+            $spGetRespByForm = 'CALL spGetRespByForm(?)';
+
+             $params = array('idForm' => $id);
+
+            if(!empty($id)){
+                $data = $this->db->query($spGetRespByForm,$params);
+            }
+            
+            $this->response($data->result(), REST_Controller::HTTP_OK);
+        }
+
         
 }
